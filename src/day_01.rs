@@ -5,9 +5,11 @@ use itertools::Itertools;
 pub fn day_01() {
     let input = get_input();
 
-    println!("Day 01 Part A: {}", solve_part_a(&input));
+    let solution_a = solve(&input, 2).expect("No solution found for Part A");
+    println!("Part A: {}", solution_a);
 
-    println!("Day 01 Part B: {}", solve_part_b(&input));
+    let solution_b = solve(&input, 3).expect("No solution found for Part B");
+    println!("Part B: {}", solution_b);
 }
 
 
@@ -15,16 +17,6 @@ fn get_input() -> Vec<i32> {
     let data = fs::read_to_string("./inputs/day_01.txt")
         .expect("Unable to read file");
     data.lines().map(|s| s.parse().unwrap()).collect()
-}
-
-
-fn solve_part_a(input: &Vec<i32>) -> i32 {
-    solve(input, 2).expect("No solution found for Day 01 - Part A")
-}
-
-
-fn solve_part_b(input: &Vec<i32>) -> i32 {
-    solve(input, 3).expect("No solution found for Day 01 - Part B")
 }
 
 

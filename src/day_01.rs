@@ -1,5 +1,5 @@
-use std::fs;
 use itertools::Itertools;
+use crate::utils::get_file;
 
 
 pub fn day_01() {
@@ -14,8 +14,7 @@ pub fn day_01() {
 
 
 fn get_input() -> Vec<i32> {
-    let data = fs::read_to_string("./inputs/day_01.txt")
-        .expect("Unable to read file");
+    let data = get_file("./inputs/day_01.txt");
     data.lines().map(|s| s.parse().unwrap()).collect()
 }
 

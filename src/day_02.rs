@@ -1,5 +1,5 @@
-use std::fs;
 use regex::Regex;
+use crate::utils::get_file;
 
 
 pub fn day_02() {
@@ -14,8 +14,7 @@ pub fn day_02() {
 
 
 fn get_input() -> Vec<Password> {
-    let data = fs::read_to_string("./inputs/day_02.txt")
-        .expect("Unable to read file");
+    let data = get_file("./inputs/day_02.txt");
     let re = Regex::new(r"(\d+)-(\d+) (.): ([a-z]+)").unwrap();
     let mut passwords = vec![];
 

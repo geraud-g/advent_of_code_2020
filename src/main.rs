@@ -3,6 +3,7 @@ use std::env;
 mod day_01;
 mod day_02;
 mod utils;
+mod day_03;
 
 
 fn main() {
@@ -18,7 +19,7 @@ fn solve_day(day: i32) {
     let fn_day = match day {
         1 => day_01::day_01,
         2 => day_02::day_02,
-        3 => unimplemented!(),
+        3 => day_03::day_03,
         4 => unimplemented!(),
         5 => unimplemented!(),
         6 => unimplemented!(),

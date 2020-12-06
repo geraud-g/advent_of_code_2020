@@ -6,6 +6,7 @@ mod utils;
 mod day_03;
 mod day_04;
 mod day_05;
+mod day_06;
 
 
 fn main() {
@@ -24,7 +25,7 @@ fn solve_day(day: i32) {
         3 => day_03::day_03,
         4 => day_04::day_04,
         5 => day_05::day_05,
-        6 => unimplemented!(),
+        6 => day_06::day_06,
         7 => unimplemented!(),
         8 => unimplemented!(),
         9 => unimplemented!(),

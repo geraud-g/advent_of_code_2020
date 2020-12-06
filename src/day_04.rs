@@ -1,5 +1,5 @@
 use regex::Regex;
-use crate::utils::get_file;
+use crate::utils::{get_file, LINE_ENDING};
 use itertools::Itertools;
 
 
@@ -18,7 +18,7 @@ fn get_input() -> Vec<Passport> {
     let data = get_file("./inputs/day_04.txt");
     let mut passports = vec![];
 
-    for raw_passport in data.split("\r\n\r\n") {
+    for raw_passport in data.split(&format!("{}{}", LINE_ENDING, LINE_ENDING)) {
         passports.push(get_passport(raw_passport));
     }
     passports

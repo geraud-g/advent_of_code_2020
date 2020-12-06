@@ -1,5 +1,6 @@
-use crate::utils::get_file;
+use crate::utils::{get_file, LINE_ENDING};
 use std::collections::HashSet;
+use std::io::BufReader;
 
 
 pub fn day_06() {
@@ -14,7 +15,7 @@ pub fn day_06() {
 
 fn get_input() -> Vec<String> {
     get_file("./inputs/day_06.txt")
-        .split("\n\n").map(|l| l.to_string())
+        .split(&format!("{}{}", LINE_ENDING, LINE_ENDING)).map(|l| l.to_string())
         .collect()
 }
 
@@ -30,11 +31,12 @@ fn solve_part_a(groups: &Vec<String>) -> usize {
 
 fn solve_part_b(groups: &Vec<String>) -> usize {
     let mut answered_questions = 0;
+
     for group in groups {
         let answers = group.split_whitespace()
             .map(|f| f.chars().collect())
             .fold(
-                ('a'..='z').collect::<HashSet<_>>(),
+                (b'a'..=b'z').map(char::from).collect::<HashSet<_>>(),
                 |acc, val| acc.intersection(&val).cloned().collect::<HashSet<_>>(),
             ).len();
 

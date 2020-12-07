@@ -1,6 +1,5 @@
 use crate::utils::{get_file, LINE_ENDING};
 use std::collections::HashSet;
-use std::io::BufReader;
 
 
 pub fn day_06() {

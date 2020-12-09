@@ -39,13 +39,19 @@ fn is_sum_of_two(numbers: &[u64], number: u64) -> bool {
 
 
 pub fn solve_part_b(numbers: &[u64], number: u64) -> u64 {
-    for end in 0..numbers.len() {
-        for start in 0..end {
-            let slice = &numbers[start..end];
-            if slice.iter().sum::<u64>() == number {
-                return min(slice.iter()).unwrap() + max(slice.iter()).unwrap();
-            }
+    let mut total = numbers[0];
+    let mut low_index = 0;
+    let mut high_index = 0;
+
+    while total != number {
+        if total < number {
+            high_index += 1;
+            total += numbers[high_index];
+        } else {
+            total -= numbers[low_index];
+            low_index += 1;
         }
     }
-    unreachable!()
+    let slice = &numbers[low_index..high_index];
+    min(slice.iter()).unwrap() + max(slice.iter()).unwrap()
 }

@@ -1,5 +1,5 @@
 use crate::utils::get_file;
-use itertools::{Itertools, min, max};
+use itertools::{min, max};
 
 
 const PREAMBLE_LENGTH: usize = 25;
@@ -23,23 +23,22 @@ fn get_input() -> Vec<u64> {
 }
 
 
-fn solve_part_a(numbers: &[u64]) -> u64 {
+pub fn solve_part_a(numbers: &[u64]) -> u64 {
     let idx_found = (0..(numbers.len() - PREAMBLE_LENGTH))
         .find(|&idx|
             !is_sum_of_two(&numbers[idx..(PREAMBLE_LENGTH + idx)], numbers[PREAMBLE_LENGTH + idx])
         ).unwrap();
-    return numbers[idx_found + PREAMBLE_LENGTH];
+    numbers[idx_found + PREAMBLE_LENGTH]
 }
 
 
 fn is_sum_of_two(numbers: &[u64], number: u64) -> bool {
     numbers.iter()
-        .combinations(2)
-        .any(|c| c[0] + c[1] == number)
+        .any(|&n| number > n && numbers.contains(&(number - n)))
 }
 
 
-fn solve_part_b(numbers: &[u64], number: u64) -> u64 {
+pub fn solve_part_b(numbers: &[u64], number: u64) -> u64 {
     for end in 0..numbers.len() {
         for start in 0..end {
             let slice = &numbers[start..end];

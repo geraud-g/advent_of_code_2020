@@ -1,15 +1,13 @@
+use aoc_2020::day_01;
+use aoc_2020::day_02;
+use aoc_2020::day_03;
+use aoc_2020::day_04;
+use aoc_2020::day_05;
+use aoc_2020::day_06;
+use aoc_2020::day_07;
+use aoc_2020::day_08;
+use aoc_2020::day_09;
 use std::env;
-
-mod day_01;
-mod day_02;
-mod utils;
-mod day_03;
-mod day_04;
-mod day_05;
-mod day_06;
-mod day_07;
-mod day_08;
-mod day_09;
 
 
 fn main() {

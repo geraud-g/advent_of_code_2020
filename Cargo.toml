@@ -5,8 +5,19 @@ authors = ["ster"]
 edition = "2018"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[lib]
+name = "aoc_2020"
+path = "src/lib.rs"
+
 
 [dependencies]
 itertools = "0.9.0"
 regex = "1.4.2"
 lazy_static = "1.4.0"
+
+[dev-dependencies]
+criterion = "0.3"
+
+[[bench]]
+name = "bench_main"
+harness = false

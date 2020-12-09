@@ -63,6 +63,7 @@ pub struct Instruction {
     value: i32,
 }
 
+
 #[derive(Debug, Copy, Clone)]
 pub enum Action {
     Acc,

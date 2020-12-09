@@ -5,10 +5,10 @@ use crate::utils::get_file;
 pub fn day_02() {
     let input = get_input();
 
-    let solution_a = input.iter().filter(|p|p.is_valid_part_a()).count();
+    let solution_a = input.iter().filter(|p| p.is_valid_part_a()).count();
     println!("Part A: {}", solution_a);
 
-    let solution_b = input.iter().filter(|p|p.is_valid_part_b()).count();
+    let solution_b = input.iter().filter(|p| p.is_valid_part_b()).count();
     println!("Part B: {}", solution_b);
 }
 

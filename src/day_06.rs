@@ -12,6 +12,7 @@ pub fn day_06() {
     println!("Part B: {}", result_b);
 }
 
+
 fn get_input() -> Vec<String> {
     get_file("./inputs/day_06.txt")
         .split(&format!("{}{}", LINE_ENDING, LINE_ENDING)).map(|l| l.to_string())

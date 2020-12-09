@@ -1,9 +1,19 @@
 use criterion::{black_box, criterion_group, criterion_main, Criterion};
 use aoc_2020::day_09::{solve_part_a, solve_part_b};
 use aoc_2020::utils::get_file;
+use aoc_2020::day_04::day_04;
+use aoc_2020::day_03::day_03;
 
 
 fn criterion_benchmark(c: &mut Criterion) {
+    c.bench_function(
+        "test_day_03",
+        |b| b.iter(|| day_03()));
+
+    c.bench_function(
+        "test_day_04",
+        |b| b.iter(|| day_04()));
+
     let input: Vec<u64> = get_file("./inputs/day_09.txt")
         .lines()
         .map(|line| line.parse::<u64>().unwrap()).collect();

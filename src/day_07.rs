@@ -6,8 +6,7 @@ use lazy_static::lazy_static;
 
 lazy_static! {
     static ref REGEX_TWO_PARS: Regex = Regex::new(r"([\w ]+) bags? contain ([\w ,]+)").unwrap();
-    static ref REGEX_CONTAINS_BAGS
-    : Regex = Regex::new(r"(\d+) ([\w ]+) bags?").unwrap();
+    static ref REGEX_CONTAINS_BAGS: Regex = Regex::new(r"(\d+) ([\w ]+) bags?").unwrap();
 }
 
 
@@ -28,12 +27,9 @@ fn get_input() -> String {
 
 
 fn get_rules(input: String) -> HashMap<String, Vec<Bag>> {
-    let mut rules = HashMap::new();
-    for rule in input.lines() {
-        let (key, contains) = get_rule(rule);
-        rules.insert(key, contains);
-    }
-    rules
+    input.lines()
+        .map(|l| get_rule(l))
+        .collect::<HashMap<String, Vec<Bag>>>()
 }
 
 
@@ -51,6 +47,7 @@ fn get_rule(rule: &str) -> (String, Vec<Bag>) {
     };
     return (key, bags);
 }
+
 
 fn contains_shiny(key: &str, bags: &HashMap<String, Vec<Bag>>) -> bool {
     bags.get(key).unwrap()
@@ -71,4 +68,3 @@ struct Bag {
     name: String,
     quantity: u64,
 }
-

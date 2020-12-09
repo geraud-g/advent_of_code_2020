@@ -21,6 +21,7 @@ fn get_seat_id(line: &str) -> u32 {
     row * 8 + col
 }
 
+
 fn get_seat_row_col(line: &str) -> (u32, u32) {
     let (mut min_row, mut max_row) = (0, 127);
     let (mut min_col, mut max_col) = (0, 7);

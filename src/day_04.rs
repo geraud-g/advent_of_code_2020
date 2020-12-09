@@ -1,6 +1,14 @@
-use regex::Regex;
 use crate::utils::{get_file, LINE_ENDING};
+use regex::Regex;
 use itertools::Itertools;
+use lazy_static::lazy_static;
+
+
+lazy_static! {
+    static ref REGEX_VALID_HEIGHT: Regex = Regex::new(r"^(\d+)\s*(in|cm)$").unwrap();
+    static ref REGEX_VALID_HAIR_COLOR: Regex = Regex::new(r"^#[a-zA-Z0-9]{6}$").unwrap();
+    static ref REGEX_VALID_PASSPORT_ID: Regex = Regex::new(r"^\d{9}$").unwrap();
+}
 
 
 pub fn day_04() {
@@ -59,6 +67,7 @@ struct Passport {
     cid: Option<String>,
 }
 
+
 impl Passport {
     pub fn is_valid_part_a(&self) -> bool {
         self.byr.is_some() &&
@@ -82,8 +91,7 @@ impl Passport {
     }
 
     fn valid_height(&self) -> bool {
-        let re = Regex::new(r"^(\d+)\s*(in|cm)$").unwrap();
-        if let Some(result) = re.captures(self.hgt.as_ref().unwrap()) {
+        if let Some(result) = REGEX_VALID_HEIGHT.captures(self.hgt.as_ref().unwrap()) {
             match &result[2] {
                 "in" => is_valid_digit(&result[1], 59, 76),
                 "cm" => is_valid_digit(&result[1], 150, 193),
@@ -95,8 +103,7 @@ impl Passport {
     }
 
     fn valid_hair_color(&self) -> bool {
-        let re = Regex::new(r"^#[a-zA-Z0-9]{6}$").unwrap();
-        re.is_match(self.hcl.as_ref().unwrap())
+        REGEX_VALID_HAIR_COLOR.is_match(self.hcl.as_ref().unwrap())
     }
 
     fn valid_eye_color(&self) -> bool {
@@ -107,10 +114,10 @@ impl Passport {
     }
 
     fn valid_passport_id(&self) -> bool {
-        let re = Regex::new(r"^\d{9}$").unwrap();
-        re.is_match(&self.pid.as_ref().unwrap())
+        REGEX_VALID_PASSPORT_ID.is_match(&self.pid.as_ref().unwrap())
     }
 }
+
 
 fn is_valid_digit(value: &str, min_value: i32, max_value: i32) -> bool {
     match value.parse::<i32>() {

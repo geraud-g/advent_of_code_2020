@@ -1,4 +1,5 @@
 use crate::utils::get_file;
+use itertools::{zip, iterate};
 
 
 const TREE: char = '#';
@@ -23,18 +24,11 @@ fn get_input() -> Vec<Vec<char>> {
 
 fn traverse_map(area: &[Vec<char>], delta_y: usize, delta_x: usize) -> u64 {
     let x_len = area[0].len();
-    let mut x = 0;
-    let mut tree_count = 0;
-
-    for y in (0..area.len()).step_by(delta_y) {
-        let tile = area[y].get(x).unwrap();
-        if tile.eq(&TREE) {
-            tree_count += 1
-        }
-        x = (x + delta_x) % x_len;
-    }
-
-    tree_count
+    let y_range = (0..area.len()).step_by(delta_y);
+    let x_range = iterate(0, |&i| i + delta_x);
+    zip(y_range, x_range)
+        .filter(|(y, x)| area[*y][*x % x_len].eq(&TREE))
+        .count() as u64
 }
 
 

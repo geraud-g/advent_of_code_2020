@@ -76,7 +76,7 @@ pub enum Action {
 struct Cpu {
     idx: usize,
     pub accumulator: usize,
-    history: HashSet<(i32, usize)>,
+    history: HashSet<usize>,
 }
 
 
@@ -105,7 +105,7 @@ impl Cpu {
     fn run(&mut self, instructions: &Vec<Instruction>) {
         while self.idx < instructions.len() {
             let instruction = instructions.get(self.idx).unwrap();
-            let state = (instruction.value, self.idx);
+            let state = self.idx;
             if self.history.contains(&state) { return; }
             self.history.insert(state);
 

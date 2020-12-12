@@ -23,8 +23,8 @@ fn solve(input: &Vec<i32>, entries_nbr: usize) -> Option<i32> {
     let valid_combinations = input.iter()
         .filter(|i| **i < 2020)
         .cloned()
-        .combinations(entries_nbr).
-        find(|comb| comb.iter().sum::<i32>() == 2020);
+        .combinations(entries_nbr)
+        .find(|comb| comb.iter().sum::<i32>() == 2020);
 
     match valid_combinations {
         Some(value) => { Some(value.iter().product()) }

@@ -3,6 +3,7 @@ use aoc_2020::day_09::{solve_part_a, solve_part_b};
 use aoc_2020::utils::get_file;
 use aoc_2020::day_04::day_04;
 use aoc_2020::day_03::day_03;
+use aoc_2020::day_11::day_11;
 
 
 fn criterion_benchmark(c: &mut Criterion) {
@@ -30,6 +31,9 @@ fn criterion_benchmark(c: &mut Criterion) {
         |b| b.iter(||
             solve_part_b(black_box(&input), result_part_a)
         ));
+    c.bench_function(
+        "test_day_11",
+        |b| b.iter(|| day_11()));
 }
 
 

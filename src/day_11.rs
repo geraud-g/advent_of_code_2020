@@ -1,15 +1,11 @@
 use crate::utils::get_file;
+use std::mem::swap;
 
 const EMPTY: char = 'L';
 const OCCUPIED: char = '#';
 
 const DIRECTIONS: [(i32, i32); 8] = [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)];
 
-
-#[test]
-fn test() {
-    day_11()
-}
 
 pub fn day_11() {
     let input = get_input();
@@ -31,13 +27,12 @@ fn get_input() -> Vec<Vec<char>> {
 
 
 pub fn solve(plane: &Plane, get_value: fn(&Plane, char, usize, usize, usize, usize) -> char) -> usize {
-    let mut tmp_plane = plane.copy();
+    let mut tmp_plane = plane.clone();
     let width = plane.seats[0].len();
     let height = plane.seats.len();
+    let mut new_plane = tmp_plane.clone();
 
     loop {
-        let mut new_plane = tmp_plane.copy();
-
         for y in 0..height {
             for x in 0..width {
                 new_plane.seats[y][x] = get_value(&tmp_plane, tmp_plane.seats[y][x], y, x, width, height)
@@ -47,25 +42,19 @@ pub fn solve(plane: &Plane, get_value: fn(&Plane, char, usize, usize, usize, usi
         if new_plane.eq(&tmp_plane) {
             return new_plane.count_occupied();
         }
-        tmp_plane = new_plane.copy();
+
+        swap(&mut tmp_plane, &mut new_plane)
     }
 }
 
 
-#[derive(Eq, PartialEq)]
+#[derive(Eq, PartialEq, Clone)]
 pub struct Plane {
     pub seats: Vec<Vec<char>>
 }
 
 
 impl Plane {
-    fn copy(&self) -> Self {
-        let new_seats = self.seats.iter()
-            .map(|s| s.clone())
-            .collect::<Vec<Vec<char>>>();
-        Plane { seats: new_seats }
-    }
-
     fn count_occupied(&self) -> usize {
         self.seats.iter()
             .flat_map(|s| s)

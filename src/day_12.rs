@@ -1,11 +1,6 @@
 use crate::utils::get_file;
 
 
-#[test]
-fn test() {
-    day_12()
-}
-
 pub fn day_12() {
     let actions = get_input();
 

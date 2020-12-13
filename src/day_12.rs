@@ -34,8 +34,7 @@ fn solve_part_a(actions: &Vec<Action>) -> i32 {
     for action in actions {
         ship.perform_action(action);
     }
-    println!("Ship position: {:?}", ship);
-    0
+    ship.position.y.abs() + ship.position.x.abs()
 }
 
 

@@ -32,8 +32,8 @@ pub fn solve_part_a(numbers: &HashSet<i64>, counter: Counter) -> Option<i64> {
             let diff = n - counter.value;
             let mut c = counter.new_from(n);
             match diff {
-                1 => c.one_diff = c.one_diff + 1,
-                3 => c.three_diff = c.three_diff + 1,
+                1 => c.one_diff += 1,
+                3 => c.three_diff += 1,
                 _ => {}
             }
             let res = solve_part_a(numbers, c);
@@ -49,8 +49,7 @@ pub fn solve_part_a(numbers: &HashSet<i64>, counter: Counter) -> Option<i64> {
 fn solve_part_b(numbers: &HashSet<i64>) -> i64 {
     let max_val = max(numbers);
     let mut new_cache: HashMap<i64, i64> = HashMap::new();
-
-    return rec(&numbers, &mut new_cache, max_val.unwrap().clone());
+    rec(&numbers, &mut new_cache, *max_val.unwrap())
 }
 
 

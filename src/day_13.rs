@@ -18,7 +18,7 @@ fn get_input() -> (i64, Vec<Bus>) {
     let input = get_file("./inputs/day_13.txt").lines().map(|l| l.to_string()).collect::<Vec<String>>();
     let earlier_bus = input[0].parse::<i64>().unwrap();
     let mut bus_list = vec![];
-    for (idx, val) in input[1].split(",").enumerate() {
+    for (idx, val) in input[1].split(',').enumerate() {
         if let Ok(res) = val.parse::<i64>() {
             bus_list.push(Bus { id: res, index: res - idx as i64 });
         }
@@ -26,7 +26,7 @@ fn get_input() -> (i64, Vec<Bus>) {
     (earlier_bus, bus_list)
 }
 
-fn solve_part_a(earlier_bus: i64, bus_list: &Vec<Bus>) -> i64 {
+fn solve_part_a(earlier_bus: i64, bus_list: &[Bus]) -> i64 {
     let mut current_time = earlier_bus;
     let mut minutes_waited = 0;
 
@@ -42,7 +42,7 @@ fn solve_part_a(earlier_bus: i64, bus_list: &Vec<Bus>) -> i64 {
 }
 
 
-fn solve_part_b(buses: &Vec<Bus>) -> i64 {
+fn solve_part_b(buses: &[Bus]) -> i64 {
     let numbers = buses.iter().map(|b| b.id).collect::<Vec<i64>>();
     let mods = buses.iter().map(|b| b.index).collect::<Vec<i64>>();
 

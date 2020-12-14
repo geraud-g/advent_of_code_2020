@@ -1,9 +1,9 @@
 use std::fs;
 
 #[cfg(windows)]
-pub const LINE_ENDING: &'static str = "\r\n";
+pub const LINE_ENDING: &str = "\r\n";
 #[cfg(not(windows))]
-pub const LINE_ENDING: &'static str = "\n";
+pub const LINE_ENDING: &str = "\n";
 
 
 pub fn get_file(file_name: &str) -> String {

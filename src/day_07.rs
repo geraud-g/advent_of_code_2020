@@ -45,7 +45,7 @@ fn get_rule(rule: &str) -> (String, Vec<Bag>) {
                 .collect()
         }
     };
-    return (key, bags);
+    (key, bags)
 }
 
 
@@ -57,9 +57,9 @@ fn contains_shiny(key: &str, bags: &HashMap<String, Vec<Bag>>) -> bool {
 
 
 fn count_bags(key: &str, bags: &HashMap<String, Vec<Bag>>) -> u64 {
-    return bags.get(key).unwrap()
+    bags.get(key).unwrap()
         .iter()
-        .fold(1, |acc, bag| acc + bag.quantity * count_bags(&bag.name, bags));
+        .fold(1, |acc, bag| acc + bag.quantity * count_bags(&bag.name, bags))
 }
 
 

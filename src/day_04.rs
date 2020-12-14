@@ -37,7 +37,7 @@ fn get_passport(input: &str) -> Passport {
     let mut new_passport = Passport::default();
 
     for line in input.split_whitespace() {
-        let split_line = line.split(":").collect_vec();
+        let split_line = line.split(':').collect_vec();
         assert_eq!(split_line.len(), 2);
         match split_line[0] {
             "byr" => new_passport.byr = Some(split_line[1].to_string()),

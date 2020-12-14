@@ -19,7 +19,7 @@ fn get_input() -> Vec<i32> {
 }
 
 
-fn solve(input: &Vec<i32>, entries_nbr: usize) -> Option<i32> {
+fn solve(input: &[i32], entries_nbr: usize) -> Option<i32> {
     let valid_combinations = input.iter()
         .filter(|i| **i < 2020)
         .cloned()

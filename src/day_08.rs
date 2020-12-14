@@ -15,7 +15,7 @@ pub fn day_08() {
 fn get_input() -> Vec<Instruction> {
     let mut input = vec![];
     for line in get_file("./inputs/day_08.txt").lines() {
-        let split = line.split(" ").collect_vec();
+        let split = line.split(' ').collect_vec();
         let value = split[1].parse::<i32>().unwrap();
         let instruction = match split[0] {
             "acc" => Instruction { action: Action::Acc, value },
@@ -29,14 +29,14 @@ fn get_input() -> Vec<Instruction> {
 }
 
 
-fn solve_part_a(instructions: &Vec<Instruction>) -> usize {
+fn solve_part_a(instructions: &[Instruction]) -> usize {
     let mut cpu = Cpu::new();
     cpu.run(instructions);
     cpu.accumulator
 }
 
 
-fn solve_part_b(instructions: &Vec<Instruction>) -> usize {
+fn solve_part_b(instructions: &[Instruction]) -> usize {
     for (idx, instruction) in instructions.iter().enumerate() {
         let new_action = match instruction.action {
             Action::Nop => { Some(Action::Jmp) }
@@ -44,7 +44,7 @@ fn solve_part_b(instructions: &Vec<Instruction>) -> usize {
             _ => None
         };
         if let Some(action) = new_action {
-            let mut new_vec = instructions.clone();
+            let mut new_vec = instructions.to_owned();
             new_vec[idx] = Instruction { action, value: instruction.value };
             let mut cpu = Cpu::new();
             cpu.run(&new_vec);
@@ -102,7 +102,7 @@ impl Cpu {
         self.idx += 1
     }
 
-    fn run(&mut self, instructions: &Vec<Instruction>) {
+    fn run(&mut self, instructions: &[Instruction]) {
         while self.idx < instructions.len() {
             let instruction = instructions.get(self.idx).unwrap();
             let state = self.idx;

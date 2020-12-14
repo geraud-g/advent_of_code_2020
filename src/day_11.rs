@@ -57,7 +57,7 @@ pub struct Plane {
 impl Plane {
     fn count_occupied(&self) -> usize {
         self.seats.iter()
-            .flat_map(|s| s)
+            .flatten()
             .filter(|&s| s.eq(&OCCUPIED))
             .count()
     }

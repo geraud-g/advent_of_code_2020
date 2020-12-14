@@ -20,7 +20,7 @@ fn get_input() -> Vec<String> {
 }
 
 
-fn solve_part_a(groups: &Vec<String>) -> usize {
+fn solve_part_a(groups: &[String]) -> usize {
     groups.iter()
         .map(
             |g| g.chars().filter(|c| c.is_alphabetic()).collect::<HashSet<_>>().len()
@@ -29,7 +29,7 @@ fn solve_part_a(groups: &Vec<String>) -> usize {
 }
 
 
-fn solve_part_b(groups: &Vec<String>) -> usize {
+fn solve_part_b(groups: &[String]) -> usize {
     let mut answered_questions = 0;
 
     for group in groups {

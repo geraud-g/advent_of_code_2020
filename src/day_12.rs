@@ -29,7 +29,7 @@ fn get_input() -> Vec<Action> {
 }
 
 
-fn solve_part_a(actions: &Vec<Action>) -> i32 {
+fn solve_part_a(actions: &[Action]) -> i32 {
     let mut ship = Ship { direction: Direction::East(0), position: Point { x: 0, y: 0 } };
     for action in actions {
         ship.perform_action(action);
@@ -60,10 +60,10 @@ impl Ship {
 
     fn eval_direction(&mut self, direction: &Direction) {
         match direction {
-            Direction::North(val) => { self.position.y = self.position.y - val }
-            Direction::South(val) => { self.position.y = self.position.y + val }
-            Direction::East(val) => { self.position.x = self.position.x + val }
-            Direction::West(val) => { self.position.x = self.position.x - val }
+            Direction::North(val) => { self.position.y -= val }
+            Direction::South(val) => { self.position.y += val }
+            Direction::East(val) => { self.position.x += val }
+            Direction::West(val) => { self.position.x -= val }
         }
     }
 
@@ -99,7 +99,7 @@ impl Ship {
             Direction::West(_) => 3
         };
         let new_index = neg_mod(old_direction_idx as i32 + value, 4);
-        self.direction = (&directions[new_index as usize]).clone();
+        self.direction = directions[new_index as usize];
     }
 }
 

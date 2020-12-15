@@ -5,6 +5,7 @@ use aoc_2020::day_04::day_04;
 use aoc_2020::day_03::day_03;
 use aoc_2020::day_11::day_11;
 use aoc_2020::day_14::day_14;
+use aoc_2020::day_15::day_15;
 
 
 fn criterion_benchmark(c: &mut Criterion) {
@@ -38,6 +39,9 @@ fn criterion_benchmark(c: &mut Criterion) {
     c.bench_function(
         "test_day_14",
         |b| b.iter(|| day_14()));
+    c.bench_function(
+        "test_day_15",
+        |b| b.iter(|| day_15()));
 }
 
 

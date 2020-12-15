@@ -1,4 +1,4 @@
-use aoc_2020::{day_01, day_11, day_12, day_13};
+use aoc_2020::{day_01, day_11, day_12, day_13, day_15};
 use aoc_2020::day_02;
 use aoc_2020::day_03;
 use aoc_2020::day_04;
@@ -36,7 +36,7 @@ fn solve_day(day: i32) {
         12 => day_12::day_12,
         13 => day_13::day_13,
         14 => unimplemented!(),
-        15 => unimplemented!(),
+        15 => day_15::day_15,
         16 => unimplemented!(),
         17 => unimplemented!(),
         18 => unimplemented!(),

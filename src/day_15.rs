@@ -1,6 +1,3 @@
-use std::collections::HashMap;
-
-
 pub fn day_15() {
     let input = [16, 11, 15, 0, 1, 7];
 
@@ -16,14 +13,20 @@ pub fn day_15() {
 
 fn solve(numbers: &[usize], repeat: usize) -> usize {
     let mut last_spoken = *numbers.last().unwrap();
-    let mut spoken_numbers: HashMap<usize, Number> = numbers.iter().enumerate()
-        .map(|(idx, v)| (*v, Number::new(idx + 1))).collect();
+    let mut spoken_numbers: Vec<Option<Number>> = (0..50_000_000).map(|_| None).collect();
+
+    for (idx, num) in numbers.iter().enumerate() {
+        spoken_numbers[*num] = Some(Number::new(idx + 1))
+    }
 
     for turn in (numbers.len() + 1)..=repeat {
-        last_spoken = spoken_numbers.get(&last_spoken).unwrap().get_next_number();
-        spoken_numbers.entry(last_spoken)
-            .and_modify(|s|s.update_turn(turn))
-            .or_insert_with(||Number::new(turn));
+        last_spoken = spoken_numbers[last_spoken].unwrap().get_next_number();
+
+        if let Some(ref mut val) = &mut spoken_numbers[last_spoken] {
+            val.update_turn(turn)
+        } else {
+            spoken_numbers[last_spoken] = Some(Number::new(turn));
+        }
     }
     last_spoken
 }

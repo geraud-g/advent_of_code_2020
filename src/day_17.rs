@@ -1,4 +1,4 @@
-use std::collections::HashMap;
+use std::collections::{HashMap, HashSet};
 use crate::utils::get_file;
 
 
@@ -31,20 +31,21 @@ fn get_input() -> HashMap<Point, bool> {
 
 
 fn solve(points: &HashMap<Point, bool>, part_b: bool) -> i64 {
-    let mut current_points: HashMap<Point, bool> = points.clone();
-    let mut next_points: HashMap<Point, bool> = HashMap::new();
+    let mut points: HashMap<Point, bool> = points.clone();
 
     for _ in 0..6 {
-        for (point, _) in current_points.iter().filter(|p| *p.1) {
-            for neighbour in point.get_neighbours(part_b).iter().filter(|n| is_active(part_b, n, &current_points)) {
-                next_points.insert(*neighbour, true);
-            }
-        }
+        let points_to_eval: HashSet<Point> = points.iter()
+            .filter(|(_, &is_active)| is_active)
+            .map(|p| p.0.get_neighbours(part_b).to_vec())
+            .flatten()
+            .collect();
 
-        std::mem::swap(&mut current_points, &mut next_points);
-        next_points.clear();
+        points = points_to_eval.iter()
+            .filter(|&p| is_active(part_b, p, &points))
+            .map(|p| (*p, true))
+            .collect();
     }
-    current_points.values().filter(|&&p| p).count() as i64
+    points.values().filter(|&&p| p).count() as i64
 }
 
 
